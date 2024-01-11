@@ -30,7 +30,8 @@ const Shop = () => {
                   </div>
                 </div>
                 <div>
-                  
+                  {/*product cards*/}
+                  <ProductCards GridList={GridList} products={products}/>
                 </div>
 
               </article>
