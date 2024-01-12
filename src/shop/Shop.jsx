@@ -3,11 +3,27 @@ import PageHeader from '../components/PageHeader'
 
 const showResults = "Showing 01 - 12 of 139 Results"
 import Data from "../products.json"
+import Pagination from './Pagination'
 
 const Shop = () => {
    const [GridList,setGridList] = useState(true);
    const [products,setproducts] = useState(Data);
    console.log(products)
+
+
+   //pagination
+    const [currentPage , setCurrentPage] =useState(1);
+    const productsPerPage = 12;
+
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct,indexOfLastProduct);
+
+    // function to change the current page
+    const paginate = (pageNumber)=<{
+      setCurrentPage(pageNumber)
+    }
+
   return (
     <div>
       <PageHeader title="Our Shop Page" curPage="Shop"/>
@@ -31,8 +47,15 @@ const Shop = () => {
                 </div>
                 <div>
                   {/*product cards*/}
-                  <ProductCards GridList={GridList} products={products}/>
+                  <ProductCards GridList={GridList} products={currentProducts}/>
                 </div>
+
+                <Pagination
+                productsPerPage={productsPerPage}
+                totalProducts={products.length}
+                paginate={paginate}
+                activePage={currentPage}
+                />
 
               </article>
             </div>
