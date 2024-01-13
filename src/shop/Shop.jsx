@@ -20,7 +20,7 @@ const Shop = () => {
     const currentProducts = products.slice(indexOfFirstProduct,indexOfLastProduct);
 
     // function to change the current page
-    const paginate = (pageNumber)=<{
+    const paginate = (pageNumber)=>{
       setCurrentPage(pageNumber)
     }
 
@@ -60,8 +60,10 @@ const Shop = () => {
               </article>
             </div>
             <div className="col-lg-4 col-12">
-                right side
-            </div>
+            <aside>
+            <Search products={products} GridList={GridList}/>
+            </aside> 
+           </div>
           </div>
         </div>
       </div>
