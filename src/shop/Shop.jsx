@@ -4,6 +4,7 @@ import PageHeader from '../components/PageHeader'
 const showResults = "Showing 01 - 12 of 139 Results"
 import Data from "../products.json"
 import Pagination from './Pagination'
+import ShopCategory from './ShopCategory'
 
 const Shop = () => {
    const [GridList,setGridList] = useState(true);
@@ -22,6 +23,18 @@ const Shop = () => {
     // function to change the current page
     const paginate = (pageNumber)=>{
       setCurrentPage(pageNumber)
+    }
+
+    // filter products the current page
+    const [selectedCategory]=useState("ALL");
+    const menuItems = [...new Set(Data.map((Val)=> Val.category))];
+
+    const filterItem = (curcat)=>{
+      const newItem = Data.filter((newVal)=>{
+        return newVal.category === curcat;
+      })
+      setSelectedCategory(curcat);
+      setproducts(newItem);
     }
 
   return (
@@ -62,6 +75,13 @@ const Shop = () => {
             <div className="col-lg-4 col-12">
             <aside>
             <Search products={products} GridList={GridList}/>
+            <ShopCategory
+            filterItem={filterItem}
+            setItem={setproducts}
+            menuItems={menuItems}
+            setProducts={setproducts}
+            selectedCategory={selectedCategory}
+            />
             </aside> 
            </div>
           </div>
